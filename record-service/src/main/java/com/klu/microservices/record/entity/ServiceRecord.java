@@ -28,6 +28,15 @@ public class ServiceRecord {
     @Column(name = "mechanic")
     private String mechanic;
 
+    @Column(name = "technician_id")
+    private Long technicianId;
+
+    @Column(name = "technician_name")
+    private String technicianName;
+
+    @Column(name = "customer_email")
+    private String customerEmail;
+
     @Column(name = "start_time")
     private LocalDateTime startTime;
 
@@ -38,7 +47,7 @@ public class ServiceRecord {
     @Column(name = "status", nullable = false)
     private ServiceRecordStatus status;
 
-    @Column(name = "remarks")
+    @Column(name = "remarks", length = 1000)
     private String remarks;
 
     @Column(name = "created_at", updatable = false)
@@ -46,7 +55,9 @@ public class ServiceRecord {
 
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
     }
 
     // Getters and Setters
@@ -96,6 +107,30 @@ public class ServiceRecord {
 
     public void setMechanic(String mechanic) {
         this.mechanic = mechanic;
+    }
+
+    public Long getTechnicianId() {
+        return technicianId;
+    }
+
+    public void setTechnicianId(Long technicianId) {
+        this.technicianId = technicianId;
+    }
+
+    public String getTechnicianName() {
+        return technicianName;
+    }
+
+    public void setTechnicianName(String technicianName) {
+        this.technicianName = technicianName;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public LocalDateTime getStartTime() {

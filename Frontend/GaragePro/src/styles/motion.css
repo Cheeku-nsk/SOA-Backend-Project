@@ -1,0 +1,316 @@
+/* ==========================================================================
+   GaragePro Motion System Foundations
+   Premium Automotive SaaS Motion Design Tokens, Keyframes & Accessibility
+   ========================================================================== */
+
+:root {
+  /* Timing guidelines (refined for smoother, perceptible, premium transitions) */
+  --motion-duration-micro: 200ms;
+  --motion-duration-button: 220ms;
+  --motion-duration-card: 260ms;
+  --motion-duration-page: 520ms;
+  --motion-delay-page: 60ms;
+  --motion-duration-hero: 620ms;
+  --motion-duration-dialog: 280ms;
+
+  /* Easing curves: silky smooth deceleration */
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-spring: cubic-bezier(0.34, 1.25, 0.64, 1);
+  --motion-ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Keyframe Animations
+   -------------------------------------------------------------------------- */
+
+/* Page Route Entrance (smooth 22px upward glide with rich fade) */
+@keyframes pageFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section Entrance (Upward fade with custom delay) */
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Metric / Stat Card Staggered Lift Entrance */
+@keyframes metricCardLift {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* System Status Dot Breathing Pulse (2.6s cycle) */
+@keyframes statusBreathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+    box-shadow: 0 0 10px 2px rgba(52, 211, 153, 0.35);
+  }
+}
+
+/* Automotive Accent Pulse (Blue/Sky variant) */
+@keyframes accentBreathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4);
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    box-shadow: 0 0 10px 2px rgba(14, 165, 233, 0.4);
+  }
+}
+
+/* Subtle Automotive Laser/Telemetry Scanline */
+@keyframes automotiveLaserScan {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%, 100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Bar Chart Staggered Growth */
+@keyframes barGrowUp {
+  0% {
+    transform: scaleY(0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Radix Modal Overlay Fade In / Out */
+@keyframes radixOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes radixOverlayOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Radix Modal Content Fade & Upward Motion In / Out */
+@keyframes radixContentIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes radixContentOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.97);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Motion Utility Classes
+   -------------------------------------------------------------------------- */
+
+/* Page Transition Wrapper (520ms duration + 60ms initial delay for perceptible smoothness) */
+.motion-page-enter {
+  animation: pageFadeUp var(--motion-duration-page) var(--motion-ease-out) var(--motion-delay-page) both;
+  will-change: opacity, transform;
+}
+
+/* Hero Stagger Items */
+.motion-hero-item {
+  animation: heroFadeUp var(--motion-duration-hero) var(--motion-ease-out) both;
+  will-change: opacity, transform;
+}
+
+.motion-delay-1 { animation-delay: 100ms; }
+.motion-delay-2 { animation-delay: 200ms; }
+.motion-delay-3 { animation-delay: 300ms; }
+.motion-delay-4 { animation-delay: 400ms; }
+.motion-delay-5 { animation-delay: 500ms; }
+.motion-delay-6 { animation-delay: 600ms; }
+
+/* Interactive Cards */
+.motion-card-interactive {
+  transition: transform var(--motion-duration-card) var(--motion-ease-out),
+              border-color var(--motion-duration-card) ease,
+              box-shadow var(--motion-duration-card) var(--motion-ease-out),
+              background-color var(--motion-duration-card) ease;
+  will-change: transform, box-shadow;
+}
+
+.motion-card-interactive:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(14, 165, 233, 0.18), 0 0 18px 0 rgba(56, 189, 248, 0.1);
+}
+
+/* Metric Stat Card Lift Entrance */
+.motion-stat-card {
+  animation: metricCardLift 620ms var(--motion-ease-out) both;
+  will-change: opacity, transform;
+}
+
+/* Primary / Secondary Button Enhancements */
+.motion-btn-interactive {
+  position: relative;
+  transition: transform var(--motion-duration-button) var(--motion-ease-out),
+              box-shadow var(--motion-duration-button) var(--motion-ease-out),
+              background-color var(--motion-duration-button) ease,
+              border-color var(--motion-duration-button) ease;
+}
+
+.motion-btn-interactive:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.motion-btn-interactive:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.motion-btn-interactive:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* Button arrow hover motion */
+.motion-btn-interactive .motion-arrow {
+  transition: transform var(--motion-duration-button) var(--motion-ease-out);
+}
+
+.motion-btn-interactive:hover:not(:disabled) .motion-arrow {
+  transform: translateX(4px);
+}
+
+/* System Status Breathing Indicator */
+.status-indicator-breathe {
+  animation: statusBreathe 2.6s var(--motion-ease-in-out) infinite;
+  will-change: transform, opacity, box-shadow;
+}
+
+.status-indicator-accent {
+  animation: accentBreathe 2.8s var(--motion-ease-in-out) infinite;
+  will-change: transform, opacity, box-shadow;
+}
+
+/* Automotive Telemetry Grid Glow & Track */
+.automotive-track-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.automotive-track-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.4), transparent);
+  animation: automotiveLaserScan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Modal Dialog Motion with Radix Data Attributes */
+[data-state="open"].radix-overlay-motion {
+  animation: radixOverlayIn var(--motion-duration-dialog) var(--motion-ease-out) forwards;
+}
+
+[data-state="closed"].radix-overlay-motion {
+  animation: radixOverlayOut 180ms ease-in forwards;
+}
+
+[data-state="open"].radix-content-motion {
+  animation: radixContentIn var(--motion-duration-dialog) var(--motion-ease-spring) forwards;
+}
+
+[data-state="closed"].radix-content-motion {
+  animation: radixContentOut 180ms ease-in forwards;
+}
+
+/* Bar Chart Entrance */
+.motion-bar-grow {
+  transform-origin: bottom;
+  animation: barGrowUp 650ms var(--motion-ease-out) both;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Strict Reduced Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .motion-page-enter,
+  .motion-hero-item,
+  .motion-stat-card,
+  .status-indicator-breathe,
+  .status-indicator-accent,
+  .automotive-track-line::after,
+  .motion-bar-grow {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .motion-card-interactive:hover,
+  .motion-btn-interactive:hover,
+  .motion-btn-interactive:active {
+    transform: none !important;
+  }
+
+  .motion-btn-interactive .motion-arrow {
+    transform: none !important;
+  }
+}

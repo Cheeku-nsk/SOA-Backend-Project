@@ -1,6 +1,7 @@
 package com.klu.microservices.book.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vehicle")
@@ -18,17 +19,30 @@ public class Vehicle {
     @Column(name = "registration_number", nullable = false, unique = true)
     private String registrationNumber;
 
-    @Column(name = "make")
+    @Column(name = "make", nullable = false)
     private String make;
 
-    @Column(name = "model")
+    @Column(name = "model", nullable = false)
     private String model;
 
-    @Column(name = "year")
+    @Column(name = "year", nullable = false)
     private Integer year;
 
     @Column(name = "vehicle_type")
     private String vehicleType;
+
+    @Column(name = "fuel_type")
+    private String fuelType;
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 
     // Getters and Setters
     public Long getVehicleId() {
@@ -85,5 +99,21 @@ public class Vehicle {
 
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

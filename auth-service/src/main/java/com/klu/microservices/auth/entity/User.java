@@ -23,6 +23,10 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ApprovalStatus status = ApprovalStatus.APPROVED;
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -62,5 +66,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public ApprovalStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ApprovalStatus status) {
+        this.status = status;
     }
 }
